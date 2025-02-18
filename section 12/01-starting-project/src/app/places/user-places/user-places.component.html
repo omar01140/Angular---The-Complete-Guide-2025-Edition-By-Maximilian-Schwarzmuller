@@ -1,3 +1,7 @@
 <app-places-container title="Your Favorite Places">
+  @if (resData().length === 0) {
   <p>Todo...</p>
+  }@else if(resData()){
+  <app-places [places]="resData()!" (selectPlace)="onSelectPlace($event)" />
+  }
 </app-places-container>
