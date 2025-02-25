@@ -1,43 +1,48 @@
-import { afterNextRender, Component, DestroyRef, inject, viewChild } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
-import { debounceTime } from 'rxjs';
+import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  private form = viewChild.required<NgForm>("form");
-  private des = inject(DestroyRef)
+  form = new FormGroup({
+    email: new FormControl('', {
+      validators: [Validators.email, Validators.required],
+    }),
+    password: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(6)],
+    }),
+  });
 
-  constructor(){
-    afterNextRender(()=> {
-      const savedEmail = window.localStorage.getItem("saved-email");
-      if (savedEmail) {
-        setTimeout(() => {
-          this.form().controls["email"].setValue(savedEmail)
-        }, 1);
-      }
-
-      const sub = this.form().valueChanges?.pipe(debounceTime(500)).subscribe({
-        next: (value)=>{window.localStorage.setItem("saved-email",value.email)}
-      })
-      this.des.onDestroy(()=> sub?.unsubscribe())
-    })
+  get emailIsInvalid() {
+    return (
+      this.form.controls.email.touched &&
+      this.form.controls.email.dirty &&
+      this.form.controls.email.invalid
+    );
   }
 
-  onSubmit(formData: NgForm) {
-    if (formData.form.invalid) {
-      return;
-    }
+  get passwordIsInvalid() {
+    return (
+      this.form.controls.password.touched &&
+      this.form.controls.password.dirty &&
+      this.form.controls.password.invalid
+    );
+  }
 
-    const email = formData.form.value.email;
-    const password = formData.form.value.password;
-    console.log(email, password);
-
-    this.form().reset()
+  onSubmit() {
+    console.log(this.form);
+    const enteredEmail = this.form.value.email;
+    const enteredPassword = this.form.value.password;
+    console.log(enteredEmail, enteredPassword);
   }
 }
