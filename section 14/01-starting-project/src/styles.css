@@ -15,3 +15,25 @@ body {
   padding: 0;
   height: 100%;
 }
+/* Scrollbar width */
+::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+  background: #3a2c54; /* Light gray background */
+  border-radius: 5px;
+}
+
+/* Handle (scrolling part) */
+::-webkit-scrollbar-thumb {
+  background: #9965dd; /* Darker gray handle */
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #370773; /* Even darker gray */
+}
+

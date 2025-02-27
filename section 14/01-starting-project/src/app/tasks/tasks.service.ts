@@ -41,6 +41,8 @@ export class TasksService {
   }
 
   addTask(taskData: NewTaskData, userId: string) {
+    console.log(userId);
+
     this.tasks.update((prevTasks) => [
       {
         id: new Date().getTime().toString(),
