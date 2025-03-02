@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: radial-gradient(circle at top left, #181023, #0b0519);
+  color: #c3b3d8;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+/* Scrollbar width */
+::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+  background: #3a2c54; /* Light gray background */
+  border-radius: 5px;
+}
+
+/* Handle (scrolling part) */
+::-webkit-scrollbar-thumb {
+  background: #9965dd; /* Darker gray handle */
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #370773; /* Even darker gray */
+}
+
